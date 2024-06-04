@@ -1,8 +1,12 @@
 import { useEffect } from 'react'
 
+import { useNavigate } from "react-router-dom";
+
 export default function Login(props: any) {
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("LOGIN PROPS", props)
     window.HandleSignInWithGoogle = async (response: any) => {
       await props.supabase.auth.signInWithIdToken({
         provider: 'google',
@@ -25,11 +29,17 @@ export default function Login(props: any) {
     return () => subscription.unsubscribe()
   }, [])
 
+  useEffect(() => {
+    if (props.session) {
+      navigate('/')
+    }
+  }, [props.session])
+
   return (
     <>
       <div>
         <h1>Login</h1>
-        <p>Log in to access your account!</p>
+        <p>Log in to access your account! {JSON.stringify(props.session)}</p>
       </div>
 
       <div id="g_id_onload"
