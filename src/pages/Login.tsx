@@ -1,30 +1,24 @@
-import { createClient } from '@supabase/supabase-js'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
-const supabase = createClient('https://slpoocycjgqsuoedhkbn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNscG9vY3ljamdxc3VvZWRoa2JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUyMDU0MjUsImV4cCI6MjAzMDc4MTQyNX0.xZYRTRN65rlms1Hb96IBAQvw3EGtMzUxlGPP5TVey34')
-
-window.HandleSignInWithGoogle = async (response: any) => {
-  console.log(response)
-  const { data, error } = await supabase.auth.signInWithIdToken({
-    provider: 'google',
-    token: response.credential,
-  })
-  console.log(data, error)
-}
-
-export default function Login() {
-  const [_, setSession] = useState(null)
+export default function Login(props: any) {
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
+    window.HandleSignInWithGoogle = async (response: any) => {
+      await props.supabase.auth.signInWithIdToken({
+        provider: 'google',
+        token: response.credential,
+      })
+    }
+
+    props.supabase.auth.getSession().then(({ data: { session } }) => {
+      props.setSession(session)
       console.log("LOGIN SESSION", session)
     })
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
+    } = props.supabase.auth.onAuthStateChange((_event, session) => {
+      props.setSession(session)
       console.log("SESSION CHANGE", session)
     })
 
