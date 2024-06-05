@@ -1,9 +1,19 @@
-import { useEffect } from "react"
+import { useEffect, useState, useCallback } from "react"
 
 import { useNavigate } from "react-router-dom"
 
+interface File {
+  id: number
+  user_id: string
+  absolute_path: string
+  contents: string
+  timestamp: string
+}
+
 export default function Home(props: any) {
   const navigate = useNavigate()
+
+  const [files, setFiles] = useState([])
 
   useEffect(() => {
     if (!props.session) {
@@ -11,11 +21,34 @@ export default function Home(props: any) {
     }
   }, [props.session])
 
+  const fetchFiles = useCallback(async () => {
+    const { data, error } = await props.supabase
+      .from('file')
+      .select()
+    if (error) {
+      console.error(error)
+      return
+    }
+    setFiles(data.map((file: any) => {
+      return file as File
+    }))
+  }, [props.supabase])
+
+  useEffect(() => {
+    fetchFiles()
+  }, [])
+
   return (
     <>
       <div>
         <h1>Home</h1>
-        <p>Logged in to access your account: {JSON.stringify(props.session)}</p>
+        <p>Logged in!</p>
+        {files.map((file: any) => (
+          <div key={file.id}>
+            <p>file: {file.absolute_path}</p>
+          </div>
+        ))
+        }
       </div>
     </>
   )
