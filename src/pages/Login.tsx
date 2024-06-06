@@ -6,22 +6,21 @@ export default function Login(props: any) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("LOGIN PROPS", props)
-    window.HandleSignInWithGoogle = async (response: any) => {
+    (window as any).HandleSignInWithGoogle = async (response: any) => {
       await props.supabase.auth.signInWithIdToken({
         provider: 'google',
         token: response.credential,
       })
     }
 
-    props.supabase.auth.getSession().then(({ data: { session } }) => {
+    props.supabase.auth.getSession().then(({ data: { session } }: any) => {
       props.setSession(session)
       console.log("LOGIN SESSION", session)
     })
 
     const {
       data: { subscription },
-    } = props.supabase.auth.onAuthStateChange((_event, session) => {
+    } = props.supabase.auth.onAuthStateChange((_event: any, session: any) => {
       props.setSession(session)
       console.log("SESSION CHANGE", session)
     })
