@@ -20,7 +20,7 @@ export default function Login(props: any) {
     })
 
     return () => subscription.unsubscribe()
-  }, [])
+  }, [props.supabase])
 
   useEffect(() => {
     if (props.session) {
