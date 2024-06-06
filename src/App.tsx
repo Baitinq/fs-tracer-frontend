@@ -15,15 +15,13 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/">
-            <Route index element={
-              <Home supabase={supabase} session={session} />
-            } />
-            <Route path="login" element={
-              <Login supabase={supabase} session={session} setSession={setSession} />
-            } />
-            <Route path="*" element={<p>notfound</p>} />
-          </Route>
+          <Route index element={
+            <Home supabase={supabase} session={session} />
+          } />
+          <Route path="/login" element={
+            <Login supabase={supabase} session={session} setSession={setSession} />
+          } />
+          <Route path="*" element={<p>notfound</p>} />
         </Routes>
       </BrowserRouter>
     </>
