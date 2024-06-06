@@ -13,12 +13,12 @@ function App() {
   const [session, setSession] = useState(null)
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.DEV ? '/' : '/fs-tracer-frontend'}>
         <Routes>
           <Route index element={
             <Home supabase={supabase} session={session} />
           } />
-          <Route path="/login" element={
+          <Route path="login" element={
             <Login supabase={supabase} session={session} setSession={setSession} />
           } />
           <Route path="*" element={<p>notfound</p>} />
