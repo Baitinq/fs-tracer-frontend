@@ -1,18 +1,12 @@
 import { useEffect } from 'react'
 
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 export default function Login(props: any) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    (window as any).HandleSignInWithGoogle = async (response: any) => {
-      await props.supabase.auth.signInWithIdToken({
-        provider: 'google',
-        token: response.credential,
-      })
-    }
-
     props.supabase.auth.getSession().then(({ data: { session } }: any) => {
       props.setSession(session)
       console.log("LOGIN SESSION", session)
@@ -41,22 +35,20 @@ export default function Login(props: any) {
         <p>Log in to access your account! {JSON.stringify(props.session)}</p>
       </div>
 
-      <div id="g_id_onload"
-        data-client_id="952965459060-nrnrsdoq22mf646vfa72hk410pvdda5q.apps.googleusercontent.com"
-        data-context="signin"
-        data-ux_mode="popup"
-        data-callback="HandleSignInWithGoogle"
-        data-auto_prompt="false">
-      </div>
+      <GoogleOAuthProvider clientId="952965459060-nrnrsdoq22mf646vfa72hk410pvdda5q.apps.googleusercontent.com">
+        <GoogleLogin
+          onSuccess={async (credentialResponse: any) => {
+            await props.supabase.auth.signInWithIdToken({
+              provider: 'google',
+              token: credentialResponse.credential,
+            })
 
-      <div className="g_id_signin"
-        data-type="standard"
-        data-shape="pill"
-        data-theme="outline"
-        data-text="signin"
-        data-size="large"
-        data-logo_alignment="center">
-      </div>
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
+      </GoogleOAuthProvider>
     </>
   )
 }
