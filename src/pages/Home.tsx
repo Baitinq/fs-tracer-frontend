@@ -45,7 +45,7 @@ export default function Home(props: any) {
         <p>Logged in!</p>
         {files.map((file: any) => (
           <div key={file.id}>
-            <p>file: {file.absolute_path}</p>
+            <p className="underline">file: {file.absolute_path}</p>
           </div>
         ))
         }
