@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createClient } from '@supabase/supabase-js'
 
-import './App.css'
 import Home from './pages/Home'
 import Login from './pages/Login'
 

@@ -41,7 +41,7 @@ export default function Home(props: any) {
   return (
     <>
       <div>
-        <h1>Home</h1>
+        <h1 className="font-bold">Home</h1>
         <p>Logged in!</p>
         {files.map((file: any) => (
           <div key={file.id}>
