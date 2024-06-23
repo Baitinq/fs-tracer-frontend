@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react"
 
 import { useNavigate } from "react-router-dom"
+import SideBar from "../components/Sidebar/Sidebar"
 
 export default function Home(props: any) {
   const navigate = useNavigate()
@@ -32,15 +33,18 @@ export default function Home(props: any) {
 
   return (
     <>
-      <div>
-        <h1 className="font-bold">Home</h1>
-        <p>Logged in!</p>
-        {files.map((file: any) => (
-          <div key={file.id}>
-            <p className="underline">file: {file.absolute_path}</p>
-          </div>
-        ))
-        }
+      <div className="flex h-screen">
+        <SideBar />
+        <main className="flex-1 overflow-y-auto">
+          <h1 className="font-bold">Home</h1>
+          <p>Logged in!</p>
+          {files.map((file: any) => (
+            <div key={file.id}>
+              <p className="underline">file: {file.absolute_path}</p>
+            </div>
+          ))
+          }
+        </main>
       </div>
     </>
   )
