@@ -2,14 +2,6 @@ import { useEffect, useState, useCallback } from "react"
 
 import { useNavigate } from "react-router-dom"
 
-interface File {
-  id: number
-  user_id: string
-  absolute_path: string
-  contents: string
-  timestamp: string
-}
-
 export default function Home(props: any) {
   const navigate = useNavigate()
 
