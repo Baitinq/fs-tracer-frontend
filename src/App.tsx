@@ -5,6 +5,7 @@ import { createClient } from '@supabase/supabase-js'
 
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Logout from './pages/Logout';
 
 const supabase = createClient('https://slpoocycjgqsuoedhkbn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNscG9vY3ljamdxc3VvZWRoa2JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUyMDU0MjUsImV4cCI6MjAzMDc4MTQyNX0.xZYRTRN65rlms1Hb96IBAQvw3EGtMzUxlGPP5TVey34')
 
@@ -19,6 +20,9 @@ function App() {
           } />
           <Route path="login" element={
             <Login supabase={supabase} session={session} setSession={setSession} />
+          } />
+          <Route path="logout" element={
+            <Logout supabase={supabase} session={session} setSession={setSession} />
           } />
           <Route path="*" element={<p>notfound</p>} />
         </Routes>
