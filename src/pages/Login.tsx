@@ -29,25 +29,27 @@ export default function Login(props: any) {
 
   return (
     <>
-      <div>
-        <h1>Login</h1>
-        <p>Log in to access your account! {JSON.stringify(props.session)}</p>
+      <div className="flex flex-col items-center">
+        <h1 className="text-blue-700">Login</h1>
+
+        <GoogleOAuthProvider clientId="952965459060-nrnrsdoq22mf646vfa72hk410pvdda5q.apps.googleusercontent.com">
+          <GoogleLogin
+            onSuccess={async (credentialResponse: any) => {
+              await props.supabase.auth.signInWithIdToken({
+                provider: 'google',
+                token: credentialResponse.credential,
+              })
+
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+            width={7777}
+            size={"large"}
+            shape={"pill"}
+          />
+        </GoogleOAuthProvider>
       </div>
-
-      <GoogleOAuthProvider clientId="952965459060-nrnrsdoq22mf646vfa72hk410pvdda5q.apps.googleusercontent.com">
-        <GoogleLogin
-          onSuccess={async (credentialResponse: any) => {
-            await props.supabase.auth.signInWithIdToken({
-              provider: 'google',
-              token: credentialResponse.credential,
-            })
-
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
-      </GoogleOAuthProvider>
     </>
   )
 }
