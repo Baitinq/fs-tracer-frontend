@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react"
 
 import { useNavigate } from "react-router-dom"
 import SideBar from "../components/Sidebar/Sidebar"
+import LineGraph from "../components/Graphs/LineGraph"
 
 export default function Home(props: any) {
   const navigate = useNavigate()
@@ -36,8 +37,7 @@ export default function Home(props: any) {
       <div className="flex h-screen">
         <SideBar />
         <main className="flex-1 overflow-y-auto">
-          <h1 className="font-bold">Home</h1>
-          <p>Logged in!</p>
+          <LineGraph />
           {files.map((file: any) => (
             <div key={file.id}>
               <p className="underline">file: {file.absolute_path}</p>
