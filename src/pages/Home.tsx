@@ -37,13 +37,20 @@ export default function Home(props: any) {
       <div className="flex h-screen">
         <SideBar />
         <main className="flex-1 overflow-y-auto">
-          <LineGraph />
-          {files.map((file: any) => (
-            <div key={file.id}>
-              <p className="underline">file: {file.absolute_path}</p>
-            </div>
-          ))
-          }
+          <div className="w-3/12">
+            <LineGraph />
+          </div>
+          <div className="w-3/12">
+            <LineGraph />
+          </div>
+          <div>
+            {files.map((file: any) => (
+              <div key={file.id}>
+                <p className="underline">file: {file.absolute_path}</p>
+              </div>
+            ))
+            }
+          </div>
         </main>
       </div>
     </>
