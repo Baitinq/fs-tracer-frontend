@@ -1,4 +1,4 @@
-type File = {
+interface File {
   id: number
   user_id: string
   absolute_path: string
