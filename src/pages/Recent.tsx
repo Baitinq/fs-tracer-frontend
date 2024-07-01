@@ -2,12 +2,11 @@ import { useEffect, useState, useCallback } from "react"
 
 import { useNavigate } from "react-router-dom"
 import SideBar from "../components/Sidebar/Sidebar"
-import LineGraph from "../components/Graphs/LineGraph"
 
-export default function Home(props: any) {
+export default function Recent(props: any) {
   const navigate = useNavigate()
 
-  const [_, setFiles] = useState([])
+  const [files, setFiles] = useState([])
 
   useEffect(() => {
     if (!props.session) {
@@ -37,11 +36,13 @@ export default function Home(props: any) {
       <div className="flex h-screen">
         <SideBar />
         <main className="flex-1 overflow-y-auto">
-          <div className="w-3/12">
-            <LineGraph />
-          </div>
-          <div className="w-3/12">
-            <LineGraph />
+          <div>
+            {files.map((file: any) => (
+              <div key={file.id}>
+                <p className="underline">file: {file.absolute_path}</p>
+              </div>
+            ))
+            }
           </div>
         </main>
       </div>

@@ -18,6 +18,9 @@ function App() {
           <Route index element={
             <Home supabase={supabase} session={session} />
           } />
+          <Route path="/recent" element={
+            <Recent supabase={supabase} session={session} />
+          } />
           <Route path="/login" element={
             <Login supabase={supabase} session={session} setSession={setSession} />
           } />
