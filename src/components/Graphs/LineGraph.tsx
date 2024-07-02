@@ -4,7 +4,6 @@ import {
 	LinearScale,
 	PointElement,
 	LineElement,
-	Title,
 	Tooltip,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
@@ -14,19 +13,12 @@ ChartJS.register(
 	LinearScale,
 	PointElement,
 	LineElement,
-	Title,
 	Tooltip
 );
 
 export default function LineGraph() {
 	const options = {
 		responsive: true,
-		plugins: {
-			title: {
-				display: true,
-				text: 'File writes per second',
-			},
-		},
 		scales: {
 			x: {
 				grid: {
@@ -67,6 +59,9 @@ export default function LineGraph() {
 	};
 
 	return (
-		<Line data={data} options={options} />
+		<div>
+			<p className="text-center">File writes per second</p>
+			<Line data={data} options={options} />
+		</div>
 	)
 }
