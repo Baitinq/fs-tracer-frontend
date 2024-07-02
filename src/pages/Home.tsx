@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import SideBar from "../components/Sidebar/Sidebar"
 import LineGraph from "../components/Graphs/LineGraph"
+import TimePicker from "../components/TimePicker/TimePicker"
 
 export default function Home(props: any) {
   const navigate = useNavigate()
@@ -36,12 +37,27 @@ export default function Home(props: any) {
     <>
       <div className="flex h-screen">
         <SideBar />
-        <main className="flex-1 overflow-y-auto">
-          <div className="w-3/12">
-            <LineGraph />
-          </div>
-          <div className="w-3/12">
-            <LineGraph />
+        <main className="overflow-y-auto flex flex-col flex-1 mx-5">
+          <div className="flex flex-col w-full gap-7 flex-grow">
+            <div className="flex flex-row gap-7 flex-grow">
+              <div className="ml-auto">
+                <TimePicker />
+              </div>
+            </div>
+            <div className="flex flex-row gap-7 flex-grow">
+              <div className="w-1/2 block bg-white border border-gray-200 rounded-lg shadow">
+              </div>
+              <div className="w-1/2 ml-auto">
+                <LineGraph />
+              </div>
+            </div>
+            <div className="flex flex-row gap-7 mb-5 flex-grow">
+              <div className="w-1/2 mr-auto">
+                <LineGraph />
+              </div>
+              <div className="w-1/2 block bg-white-500 border border-gray-200 rounded-lg shadow">
+              </div>
+            </div>
           </div>
         </main>
       </div>
