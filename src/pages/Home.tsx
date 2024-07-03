@@ -36,7 +36,7 @@ export default function Home(props: any) {
   return (
     <>
       <div className="flex h-screen">
-        <SideBar />
+        <SideBar currentPage="Home" />
         <main className="overflow-y-auto flex flex-col flex-1 mx-5">
           <div className="flex flex-col w-full gap-7 flex-grow">
             <div className="flex flex-row gap-7 flex-grow">

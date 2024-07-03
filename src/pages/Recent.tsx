@@ -34,7 +34,7 @@ export default function Recent(props: any) {
   return (
     <>
       <div className="flex h-screen">
-        <SideBar />
+        <SideBar currentPage="Recent" />
         <main className="flex-1 overflow-y-auto">
           <div>
             {files.map((file: any) => (
