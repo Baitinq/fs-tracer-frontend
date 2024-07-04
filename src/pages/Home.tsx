@@ -41,7 +41,7 @@ export default function Home(props: any) {
           <div className="flex flex-col w-full gap-7 flex-grow">
             <div className="flex flex-row gap-7 flex-grow">
               <div className="ml-auto mt-2">
-                <TimePicker />
+                <TimePicker timeframe={props.timeframe} setTimeframe={props.setTimeframe} />
               </div>
             </div>
             <div className="flex flex-row gap-7 flex-grow">
