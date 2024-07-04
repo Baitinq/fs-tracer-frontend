@@ -6,6 +6,8 @@ import {
 	LineElement,
 	Tooltip,
 } from 'chart.js';
+import { format } from 'date-fns'
+
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
@@ -48,14 +50,14 @@ export default function LineGraph(props: any) {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const timeframeEnd = new Date();
-			const timeframeStart = new Date();
+			const timeframeEnd = props.timeframe.end.toDate();
+			const timeframeStart = props.timeframe.start.toDate();
 			timeframeStart.setHours(timeframeStart.getHours() - 12)
 			const numDatapoints = 12;
 
 			const { data: rawData } = await props.supabase
 				.from('file')
-				.select().gte('timestamp', timeframeStart.toISOString()).lte('timestamp', timeframeEnd.toISOString());
+				.select('timestamp').gte('timestamp', timeframeStart.toISOString()).lte('timestamp', timeframeEnd.toISOString());
 			console.log(rawData)
 
 			const startDate = new Date(timeframeStart);
@@ -70,7 +72,7 @@ export default function LineGraph(props: any) {
 				const intervalEnd = new Date(startDate.getTime() + (i + 1) * intervalDuration);
 
 				// Format the interval start and end as strings for labeling
-				labels[i] = `${intervalStart.getHours().toString()}:${intervalStart.getMinutes().toString()}h`;
+				labels[i] = format(intervalEnd, 'MM/dd - HH:mm');
 
 				// Count the number of entries within the current interval
 				points[i] = rawData.filter(entry => {
@@ -93,7 +95,7 @@ export default function LineGraph(props: any) {
 			})
 		}
 		fetchData()
-	}, [])
+	}, [props.timeframe])
 
 	return (
 		<div>
