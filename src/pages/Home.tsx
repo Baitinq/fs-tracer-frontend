@@ -55,12 +55,12 @@ export default function Home(props: any) {
                 </div>
               </div>
               <div className="w-1/2 ml-auto">
-                <LineGraph />
+                <LineGraph name="File writes per second" supabase={props.supabase} />
               </div>
             </div>
             <div className="flex flex-row gap-7 mb-5 flex-grow">
               <div className="w-1/2 mr-auto">
-                <LineGraph />
+                <LineGraph name="caca" supabase={props.supabase} />
               </div>
               <div className="w-1/2 flex flex-col">
                 <p className="text-center">Most edited files</p>
