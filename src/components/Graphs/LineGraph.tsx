@@ -6,6 +6,7 @@ import {
 	LineElement,
 	Tooltip,
 } from 'chart.js';
+import 'chart.js/auto';
 import { format } from 'date-fns'
 
 import { useEffect, useState } from 'react';

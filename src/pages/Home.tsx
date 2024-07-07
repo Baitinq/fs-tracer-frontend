@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import SideBar from "../components/Sidebar/Sidebar"
 import LineGraph from "../components/Graphs/LineGraph"
 import TimePicker from "../components/TimePicker/TimePicker"
+import DonutChart from "../components/Graphs/DonutChart"
 
 export default function Home(props: any) {
   const navigate = useNavigate()
@@ -60,7 +61,7 @@ export default function Home(props: any) {
             </div>
             <div className="flex flex-row gap-7 mb-5 flex-grow">
               <div className="w-1/2 mr-auto">
-                <LineGraph name="caca" supabase={props.supabase} timeframe={props.timeframe} />
+                <DonutChart name="File writes size percentiles" supabase={props.supabase} timeframe={props.timeframe} />
               </div>
               <div className="w-1/2 flex flex-col">
                 <p className="text-center">Most edited files</p>
