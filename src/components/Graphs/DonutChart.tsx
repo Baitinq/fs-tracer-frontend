@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { PolarArea } from 'react-chartjs-2';
 
 import * as ss from 'simple-statistics';
+import NoData from '../Other/NoData';
 
 ChartJS.register(
 	CategoryScale,
@@ -67,10 +68,15 @@ export default function LineGraph(props: any) {
 		fetchData()
 	}, [props.timeframe]);
 
+	console.log("length: aaa", data.datasets.length)
+
 	return (
-		<div>
+		<div className="flex-grow flex-1">
 			<p className="text-center">{props.name}</p>
-			<PolarArea data={data} options={options} />
+			{data.datasets.length > 0 ?
+				<PolarArea data={data} options={options} />
+				:
+				<NoData />}
 		</div>
 	)
 }

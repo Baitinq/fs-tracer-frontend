@@ -11,6 +11,7 @@ import { format } from 'date-fns'
 
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import NoData from '../Other/NoData';
 
 ChartJS.register(
 	CategoryScale,
@@ -61,6 +62,10 @@ export default function LineGraph(props: any) {
 				.select('timestamp').gte('timestamp', timeframeStart.toISOString()).lte('timestamp', timeframeEnd.toISOString());
 			console.log(rawData)
 
+			if (rawData.length === 0) {
+				return;
+			}
+
 			const startDate = new Date(timeframeStart);
 			const endDate = new Date(timeframeEnd);
 
@@ -101,7 +106,10 @@ export default function LineGraph(props: any) {
 	return (
 		<div>
 			<p className="text-center">{props.name}</p>
-			<Line data={data} options={options} />
+			{data.datasets.length > 0 ?
+				<Line data={data} options={options} />
+				:
+				<NoData />}
 		</div>
 	)
 }
