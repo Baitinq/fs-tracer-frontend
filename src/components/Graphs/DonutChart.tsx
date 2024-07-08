@@ -47,7 +47,7 @@ export default function LineGraph(props: any) {
 				return;
 			}
 
-			let sortedLengths = rawData.map((element) => element.contents.length).sort((a, b) => a - b);
+			let sortedLengths = rawData.map((element: any) => element.contents.length).sort((a: any, b: any) => a - b);
 			console.log("TOP LENGTHS", sortedLengths)
 			let p25Value = ss.quantileSorted(sortedLengths, 0.25);
 			let p50Value = ss.quantileSorted(sortedLengths, 0.50);
@@ -59,10 +59,10 @@ export default function LineGraph(props: any) {
 			console.log("p100: ", p100Value)
 
 			setData({
-				labels: ['p25', 'p50', 'p75', 'p100'],
+				labels: ['p25', 'p50', 'p75', 'p100'] as any,
 				datasets: [{
 					data: [p25Value, p50Value, p75Value, p100Value]
-				}]
+				} as never]
 			})
 		}
 		fetchData()

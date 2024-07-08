@@ -69,7 +69,7 @@ export default function LineGraph(props: any) {
 			const startDate = new Date(timeframeStart);
 			const endDate = new Date(timeframeEnd);
 
-			const intervalDuration = (endDate - startDate) / numDatapoints;
+			const intervalDuration = (+endDate - +startDate) / numDatapoints;
 
 			let labels = Array(numDatapoints).fill("");
 			let points = Array(numDatapoints).fill(0);
@@ -81,7 +81,7 @@ export default function LineGraph(props: any) {
 				labels[i] = format(intervalEnd, 'MM/dd - HH:mm');
 
 				// Count the number of entries within the current interval
-				points[i] = rawData.filter(entry => {
+				points[i] = rawData.filter((entry: any) => {
 					const entryDate = new Date(entry.timestamp);
 					return entryDate >= intervalStart && entryDate < intervalEnd;
 				}).length;
@@ -91,13 +91,13 @@ export default function LineGraph(props: any) {
 			console.log("POINTS", points)
 
 			setData({
-				labels: labels,
+				labels: labels as any,
 				datasets: [{
 					label: 'Dataset',
 					data: points,
 					borderColor: 'rgb(53, 162, 235)',
 					backgroundColor: 'rgba(53, 162, 235, 0.5)',
-				}]
+				} as never]
 			})
 		}
 		fetchData()
