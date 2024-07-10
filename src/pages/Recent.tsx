@@ -6,6 +6,8 @@ import SideBar from "../components/Sidebar/Sidebar"
 export default function Recent(props: any) {
   const navigate = useNavigate()
 
+  const numOfFilesToShow = 20;
+
   const [files, setFiles] = useState([])
 
   const [paginationOffset, setPaginationOffset] = useState(0);
@@ -17,19 +19,21 @@ export default function Recent(props: any) {
   }, [props.session])
 
   const fetchFiles = useCallback(async () => {
-    console.log("FETCHIN FILES")
+    console.log("FETCHIN FILES, pagination: ", paginationOffset)
     const { data, error } = await props.supabase
       .from('file')
-      .select().limit(10).offset(paginationOffset)
+      .select().range(paginationOffset, paginationOffset + numOfFilesToShow - 1)
+    //.limit(10).offset(paginationOffset)
     if (error) {
       console.error(error)
       return
     }
-    console.log("FETCHED FILES")
+    console.log("RAW FILES: ", data)
     setFiles(data.map((file: any) => {
       return file as File
     }))
-  }, [props.supabase])
+    console.log("FETCHED FILES")
+  }, [props.supabase, paginationOffset])
 
   useEffect(() => {
     console.log("Aaa")
@@ -41,7 +45,7 @@ export default function Recent(props: any) {
       <div className="flex h-screen">
         <SideBar currentPage="Recent" />
         <main className="flex-1 overflow-y-auto">
-          <button onClick={() => setPaginationOffset(paginationOffset + 1)}>
+          <button onClick={() => setPaginationOffset(paginationOffset + numOfFilesToShow)}>
             clickmeforpaginate
           </button>
           <div>
