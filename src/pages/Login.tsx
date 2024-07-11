@@ -36,11 +36,11 @@ export default function Login(props: any) {
             <h1 className="text-4xl text-bold font-sans antialiased text-blue-700 tracking-wide">fs-tracer</h1>
           </div>
 
-          <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
             <div className="mx-7 my-5">
               <h5 className="mb-2 text-2xl font-bold font-sans antialiased text-gray-900">Hello!</h5>
               <div className="flex flex-row items-center gap-2">
-                <span className="font-normal text-gray-700 dark:text-gray-400" >Continue with</span>
+                <span className="font-normal text-gray-700" >Continue with</span>
                 <span>
                   <GoogleOAuthProvider clientId="952965459060-nrnrsdoq22mf646vfa72hk410pvdda5q.apps.googleusercontent.com">
                     <GoogleLogin

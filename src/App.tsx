@@ -9,6 +9,7 @@ import Logout from './pages/Logout';
 import Recent from './pages/Recent';
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { useState } from "react";
+import Search from "./pages/Search";
 
 const supabase = createClient('https://slpoocycjgqsuoedhkbn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNscG9vY3ljamdxc3VvZWRoa2JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUyMDU0MjUsImV4cCI6MjAzMDc4MTQyNX0.xZYRTRN65rlms1Hb96IBAQvw3EGtMzUxlGPP5TVey34')
 
@@ -31,6 +32,9 @@ function App() {
             } />
             <Route path="/recent" element={
               <Recent supabase={supabase} session={session} timeframe={timeframe} setTimeframe={setTimeframe} />
+            } />
+            <Route path="/search" element={
+              <Search supabase={supabase} session={session} timeframe={timeframe} setTimeframe={setTimeframe} />
             } />
             <Route path="/login" element={
               <Login supabase={supabase} session={session} setSession={setSession} timeframe={timeframe} setTimeframe={setTimeframe} />
