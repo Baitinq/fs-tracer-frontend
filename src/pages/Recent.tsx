@@ -2,6 +2,8 @@ import { useEffect, useState, useCallback } from "react"
 
 import { useNavigate } from "react-router-dom"
 import SideBar from "../components/Sidebar/Sidebar"
+import { FSTracerFile } from "../lib/types";
+import FileComponent from "../components/Other/FSTracerFile";
 
 export default function Recent(props: any) {
   const navigate = useNavigate()
@@ -46,9 +48,9 @@ export default function Recent(props: any) {
         <main className="flex-1 overflow-y-auto my-4">
           <div className="flex flex-col items-center">
             <div className="flex flex-col gap-2">
-              {files.map((file: any) => (
+              {files.map((file: FSTracerFile) => (
                 <div key={file.id} role="button" onClick={() => console.log("clocked file")}>
-                  <p className="underline">file: {file.absolute_path}</p>
+                  <FileComponent file={file} />
                 </div>
               ))
               }
