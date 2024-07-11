@@ -6,12 +6,14 @@ export default function SidebarButton(props: any) {
   }
 
   return (
-    <div role="button"
-      className={buttonStyle}>
-      <div className="grid mr-4 place-items-center">
-        <i className={props.icon}></i>
+    <a href={props.href}>
+      <div role="button"
+        className={buttonStyle}>
+        <div className="grid mr-4 place-items-center">
+          <i className={props.icon}></i>
+        </div>
+        {props.name}
       </div>
-      <a href={props.href}>{props.name}</a>
-    </div>
+    </a>
   )
 }
