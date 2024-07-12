@@ -27,6 +27,7 @@ export default function Search(props: any) {
       .from('file')
       .select()
       .ilike('absolute_path', `%${search}%`)
+      .order('timestamp', { ascending: false })
       .range(paginationOffset, paginationOffset + numOfFilesToShow - 1)
     if (error) {
       console.error(error)
@@ -61,7 +62,7 @@ export default function Search(props: any) {
           <div className="flex flex-col items-center">
             <div className="flex flex-col gap-2">
               {files.map((file: FSTracerFile) => (
-                <div key={file.id} role="button" onClick={() => console.log("clocked file")}>
+                <div key={file.id} role="button">
                   <FileComponent file={file} />
                 </div>
               ))

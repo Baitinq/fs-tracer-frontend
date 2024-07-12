@@ -24,7 +24,9 @@ export default function Recent(props: any) {
     console.log("FETCHIN FILES, pagination: ", paginationOffset)
     const { data, error } = await props.supabase
       .from('file')
-      .select().range(paginationOffset, paginationOffset + numOfFilesToShow - 1)
+      .select()
+      .order('timestamp', { ascending: false })
+      .range(paginationOffset, paginationOffset + numOfFilesToShow - 1)
     if (error) {
       console.error(error)
       return
@@ -49,7 +51,7 @@ export default function Recent(props: any) {
           <div className="flex flex-col items-center">
             <div className="flex flex-col gap-2">
               {files.map((file: FSTracerFile) => (
-                <div key={file.id} role="button" onClick={() => console.log("clocked file")}>
+                <div key={file.id} role="button">
                   <FileComponent file={file} />
                 </div>
               ))
@@ -64,8 +66,8 @@ export default function Recent(props: any) {
               next
             </button>
           </div>
-        </main>
-      </div>
+        </main >
+      </div >
     </>
   )
 }
