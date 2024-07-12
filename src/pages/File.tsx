@@ -42,25 +42,36 @@ export default function File(props: any) {
     fetchFiles()
   }, [])
 
+  const formatFilePathAsName = (filepath: string) => {
+    const parts = filepath.split('/')
+    return parts[parts.length - 1]
+  }
+
   return (
     <>
       <div className="flex h-screen">
         <SideBar />
         <main className="flex-1 overflow-y-auto my-4">
           <div className="flex flex-col items-center">
-            {filepath}
-          </div>
-          <div className="mt-5 flex flex-col items-center">
-            {latestFile && <FileInfo file={latestFile} />
+            {
+              formatFilePathAsName(filepath as string)// TODO: Filepath could be null
             }
           </div>
           <div className="mt-5 flex flex-col items-center">
-            {files.map((file: FSTracerFile) => (
-              <div key={file.id}>
-                <p>{file.absolute_path} - {file.timestamp}</p>
-              </div>
-            ))
-            }
+            <div className="border rounded py-5 px-5">
+              {latestFile && <FileInfo file={latestFile} />
+              }
+            </div>
+          </div>
+          <div className="mt-5 flex flex-col items-center">
+            <div className="border rounded py-5 px-5">
+              {files.map((file: FSTracerFile) => (
+                <div key={file.id}>
+                  <p>{file.absolute_path} - {file.timestamp}</p>
+                </div>
+              ))
+              }
+            </div>
           </div>
         </main>
       </div>
