@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Logout from './pages/Logout';
 import Recent from './pages/Recent';
+import File from './pages/File';
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { useState } from "react";
 import Search from "./pages/Search";
@@ -41,6 +42,9 @@ function App() {
             } />
             <Route path="/logout" element={
               <Logout supabase={supabase} session={session} setSession={setSession} timeframe={timeframe} setTimeframe={setTimeframe} />
+            } />
+            <Route path="/file/:filepath" element={
+              <File supabase={supabase} session={session} setSession={setSession} timeframe={timeframe} setTimeframe={setTimeframe} />
             } />
             <Route path="*" element={<p>notfound</p>} />
           </Routes>
