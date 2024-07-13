@@ -43,8 +43,8 @@ function App() {
             <Route path="/logout" element={
               <Logout supabase={supabase} session={session} setSession={setSession} timeframe={timeframe} setTimeframe={setTimeframe} />
             } />
-            <Route path="/file/:filepath" element={
-              <File supabase={supabase} session={session} setSession={setSession} timeframe={timeframe} setTimeframe={setTimeframe} />
+            <Route path="/file/:fileID" element={
+              <File supabase={supabase} session={session} setSession={setSession} />
             } />
             <Route path="*" element={<p>notfound</p>} />
           </Routes>
