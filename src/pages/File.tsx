@@ -13,6 +13,8 @@ export default function File(props: any) {
 
   const latestFile = files[0] as FSTracerFile | undefined
 
+  const maxFilesToShow = 20;
+
   useEffect(() => {
     if (!props.session) {
       navigate('/login')
@@ -26,7 +28,7 @@ export default function File(props: any) {
       .select()
       .eq('absolute_path', filepath)
       .order('timestamp', { ascending: false })
-      .range(0, 20)
+      .range(0, maxFilesToShow)
     if (error) {
       console.error(error)
       return
@@ -52,27 +54,33 @@ export default function File(props: any) {
       <div className="flex h-screen">
         <SideBar />
         <main className="flex-1 overflow-y-auto my-4">
-          <div className="flex flex-col items-center">
-            {
-              formatFilePathAsName(filepath as string)// TODO: Filepath could be null
-            }
-          </div>
-          <div className="mt-5 flex flex-col items-center">
-            <div className="border rounded py-5 px-5">
-              {latestFile && <FileInfo file={latestFile} />
+          {filepath && latestFile ? <>
+            <div className="flex flex-col items-center">
+              {
+                formatFilePathAsName(filepath)
               }
             </div>
-          </div>
-          <div className="mt-5 flex flex-col items-center">
-            <div className="border rounded py-5 px-5">
-              {files.map((file: FSTracerFile) => (
-                <div key={file.id}>
-                  <p>{file.absolute_path} - {file.timestamp}</p>
-                </div>
-              ))
-              }
+            <div className="mt-5 flex flex-col items-center">
+              <div className="block border rounded shadowpy-5 px-5 bg-blue">
+                {latestFile && <FileInfo file={latestFile} />}
+              </div>
             </div>
-          </div>
+            <div className="mt-5 flex flex-col items-center">
+              <div className="block border rounded shadow py-5 px-5 bg-blue">
+                {files.map((file: FSTracerFile) => (
+                  <div key={file.id}>
+                    <p>{file.absolute_path} - {file.timestamp}</p>
+                  </div>
+                ))
+                }
+              </div>
+            </div>
+          </> : <>
+            <div className="flex flex-col items-center">
+              <p>File not found</p>
+            </div>
+          </>
+          }
         </main>
       </div>
     </>
