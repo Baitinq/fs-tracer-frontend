@@ -85,7 +85,7 @@ export default function File(props: any) {
               <div className="block border rounded shadow py-5 px-5 bg-blue">
                 {files.map((currFile: FSTracerFile) => (
                   <div key={currFile.id}>
-                    <p>{currFile.absolute_path} - {currFile.timestamp} {currFile.id === file.id && "*"}</p>
+                    <span>{currFile.absolute_path} - {currFile.timestamp} {currFile.id === file.id && "*"}</span><button onClick={() => { }}><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><b>Restore</b></button>
                   </div>
                 ))
                 }
