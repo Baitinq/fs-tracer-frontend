@@ -65,6 +65,11 @@ export default function File(props: any) {
     return parts[parts.length - 1]
   }
 
+  const restoreFile = async (file: FSTracerFile) => {
+    console.log("RESTORING FILE: user_id: ", props.session.user.id, " file: ", file.absolute_path, " ", file.contents, " ", file.timestamp)
+    await props.supabase.from('restored_file').insert({ absolute_path: file.absolute_path, contents: file.contents, timestamp: file.timestamp, user_id: props.session.user.id })
+  }
+
   return (
     <>
       <div className="flex h-screen">
@@ -85,7 +90,7 @@ export default function File(props: any) {
               <div className="block border rounded shadow py-5 px-5 bg-blue">
                 {files.map((currFile: FSTracerFile) => (
                   <div key={currFile.id}>
-                    <span>{currFile.absolute_path} - {currFile.timestamp} {currFile.id === file.id && "*"}</span><button onClick={() => { }}><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><b>Restore</b></button>
+                    <a href={"/file/" + currFile.id}>{currFile.absolute_path} - {currFile.timestamp} {currFile.id === file.id && "*"}</a><button onClick={() => { restoreFile(currFile) }}><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><b>Restore</b></button>
                   </div>
                 ))
                 }
