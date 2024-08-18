@@ -112,7 +112,7 @@ function FileInfo(props: FileInfoProps) {
     <>
       <p>Absolute path: {props.file.absolute_path}</p>
       <p>Timestamp: {props.file.timestamp}</p>
-      <p>Content: {props.file.contents}</p>
+      <p style={{ whiteSpace: "pre-wrap" }}>Content: {props.file.contents}</p>
       <p>ID: {props.file.id}</p>
     </>
   )
