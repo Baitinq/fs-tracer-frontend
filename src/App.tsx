@@ -20,7 +20,7 @@ function App() {
   const endTimeframe = today(getLocalTimeZone());
   const [timeframe, setTimeframe] = useState({
     start: endTimeframe.subtract({ days: 7 }),
-    end: endTimeframe
+    end: endTimeframe.add({ days: 1 })
   })
 
   return (
