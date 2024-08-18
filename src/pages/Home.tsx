@@ -5,34 +5,16 @@ import SideBar from "../components/Sidebar/Sidebar"
 import LineGraph from "../components/Graphs/LineGraph"
 import TimePicker from "../components/TimePicker/TimePicker"
 import DonutChart from "../components/Graphs/DonutChart"
+import MostEditedFiles from "../components/MostEditedFiles"
 
 export default function Home(props: any) {
   const navigate = useNavigate()
-
-  const [_, setFiles] = useState([])
 
   useEffect(() => {
     if (!props.session) {
       navigate('/login')
     }
   }, [props.session])
-
-  const fetchFiles = useCallback(async () => {
-    const { data, error } = await props.supabase
-      .from('file')
-      .select()
-    if (error) {
-      console.error(error)
-      return
-    }
-    setFiles(data.map((file: any) => {
-      return file as File
-    }))
-  }, [props.supabase])
-
-  useEffect(() => {
-    fetchFiles()
-  }, [])
 
   return (
     <>
@@ -66,10 +48,7 @@ export default function Home(props: any) {
               <div className="w-1/2 flex flex-col">
                 <p className="text-center">Most edited files</p>
                 <div className="flex-grow block bg-white-500 border border-gray-200 rounded-lg shadow">
-                  <ol>
-                    <li>File 1</li>
-                    <li>File 2</li>
-                  </ol>
+                  <MostEditedFiles supabase={props.supabase} timeframe={props.timeframe} />
                 </div>
               </div>
             </div>
