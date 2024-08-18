@@ -32,8 +32,8 @@ export default function Home(props: any) {
                 <p className="text-center">Active hosts</p>
                 <div className="flex-grow block bg-white-500 border border-gray-200 rounded-lg shadow">
                   <ol>
-                    <li>Host 1</li>
-                    <li>Host 2</li>
+                    {/*TODO: Actually implement active hosts */}
+                    <li>N/A</li>
                   </ol>
                 </div>
               </div>
