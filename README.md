@@ -10,3 +10,7 @@ The frontend is built using React and TypeScript, offering a responsive and intu
 ```bash
 npm run dev
 ```
+
+Related:
+- https://github.com/baitinq/fs-tracer
+- https://github.com/baitinq/fs-tracer-backend
